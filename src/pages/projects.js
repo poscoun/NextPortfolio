@@ -5,7 +5,7 @@ import ProjectItem from "@/components/projects/project-item";
 
 export default function Projects({projects}) {
 
-    console.log(projects);
+    console.log(projects)
 
     return (
         <Layout >
@@ -40,10 +40,10 @@ export async function getServerSideProps() {
     const options = {
         method: 'POST',
         headers: {
-          Accept: 'application/json',
+          'accept': 'application/json',
           'Notion-Version': '2022-02-22',
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${TOKEN}`
+          'authorization': `Bearer ${TOKEN}`
         },
         body: JSON.stringify({
             sorts: [
