@@ -15,7 +15,7 @@ export default function Footer() {
                 </Link>
 
                 <p className="text-sm text-gray-500 sm:ml-6 sm:mt-0 mt-4">© 포트폴리오
-                    <a href="https://twitter.com/knyttneve" rel="noopener noreferrer" className="text-gray-600 ml-1" target="_blank"></a>
+                    {/* <a href="https://twitter.com/knyttneve" rel="noopener noreferrer" className="text-gray-600 ml-1" target="_blank"></a> */}
                 </p>
                 <span className="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
                     <a className="text-gray-500">
