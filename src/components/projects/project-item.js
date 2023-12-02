@@ -5,7 +5,7 @@ export default function ProjectItem({data}) {
     const title = data.properties.Name.title[0].plain_text
     const github = data.properties.Github.rich_text[0].href
     const desc = data.properties.Description.rich_text[0].plain_text
-    const imgSrc = data.cover?.file.url
+    const imgSrc = data.cover.file?.url
     const tags = data.properties.Tags.multi_select
     const start = data.properties.Date.date.start
     const end = data.properties.Date.date.end
