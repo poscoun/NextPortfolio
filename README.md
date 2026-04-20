@@ -1,38 +1,122 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 전진영 포트폴리오
 
-## Getting Started
+개발자 전진영의 개인 포트폴리오 웹사이트입니다.  
+Notion을 CMS로 활용하여 자기소개서, 경력기술서, 프로젝트 목록을 관리합니다.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+## 기술 스택
+
+| 분류 | 기술 |
+|------|------|
+| 프레임워크 | Next.js 13.1.6 (Pages Router) |
+| 언어 | JavaScript (JSX) |
+| 스타일 | Tailwind CSS 3.2.4 (JIT) |
+| CMS | Notion API (@notionhq/client) |
+| 다크모드 | next-themes |
+| 폰트 | Nanum Gothic (Google Fonts) |
+
+---
+
+## 주요 기능
+
+- **홈**: Lottie 애니메이션이 포함된 히어로 섹션
+- **프로젝트**: Notion 데이터베이스 기반 프로젝트 목록
+- **자기소개**: 자기소개서 / 경력기술서 탭 전환 뷰 (Notion 페이지 렌더링)
+- **다크모드**: 시스템 설정 연동 토글 지원
+
+---
+
+## 프로젝트 구조
+
+```
+src/
+├── components/
+│   ├── about-me/
+│   │   └── notion-block-renderer.js  # Notion 블록 렌더러
+│   ├── home/
+│   │   ├── hero.js
+│   │   └── animation.js
+│   ├── header.js
+│   ├── footer.js
+│   ├── layout.js
+│   └── dark-mode-toggle-button.js
+├── pages/
+│   ├── index.js
+│   ├── about-me.js
+│   └── projects.js
+├── config/
+│   └── index.js                      # 환경변수 참조
+├── lib/
+│   └── notion.js                     # Notion API 호출
+└── styles/
+    └── globals.css
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## 환경변수 설정
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+`.env.local` 파일을 생성하고 아래 값을 입력합니다.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+```env
+NOTION_TOKEN=         # Notion Integration 토큰
+NOTION_DATABASE_ID=   # 프로젝트 데이터베이스 ID
+RESUME_PAGE_ID=       # 자기소개서 페이지 ID
+CAREER_PAGE_ID=       # 경력기술서 페이지 ID
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+---
 
-## Learn More
+## 실행 방법
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+# 패키지 설치
+npm install
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# 개발 서버 실행
+npm run dev
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+# 프로덕션 빌드
+npm run build
 
-## Deploy on Vercel
+# 프로덕션 서버 실행
+npm run start
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+# ESLint 검사
+npm run lint
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+개발 서버 실행 후 [http://localhost:3000](http://localhost:3000) 에서 확인할 수 있습니다.
+
+---
+
+## Claude Code로 개발한 내용
+
+이 프로젝트의 UI/UX 개선 작업은 **[Claude Code](https://claude.ai/code)** (Anthropic의 AI 코딩 도구)를 활용하여 진행했습니다.
+
+### 작업 내역
+
+- **자기소개 페이지 리디자인** (`src/pages/about-me.js`)
+  - 그라디언트 헤더 섹션 추가 (이름 + 소개 문구)
+  - 탭을 pill 스타일 버튼으로 교체, 선택 시 인디고 색상 강조
+  - 콘텐츠 영역을 둥근 카드 박스(`rounded-2xl`)로 래핑
+
+- **Notion 블록 렌더러 개선** (`src/components/about-me/notion-block-renderer.js`)
+  - `h1`: 인디고 하단 보더 라인 강조
+  - `h2`: 좌측 인디고 수직 바 액센트
+  - 불릿 리스트: `list-disc marker:text-indigo-400` 자연스러운 정렬
+  - 번호 리스트: `list-decimal marker:text-indigo-500` 프로젝트별 줄 간격 확대
+  - divider: 장식 구분선(`✦`) 적용
+  - callout: 인디고 배경 카드 형태로 개선
+  - 전체 줄간격 및 섹션 여백 확대로 가독성 향상
+
+- **전역 스타일 적용** (`src/styles/globals.css`)
+  - 나눔고딕(Google Fonts) 폰트 적용
+  - 기본 폰트 크기 15pt 설정
+
+---
+
+## 라이선스
+
+MIT
