@@ -9,6 +9,7 @@ export default function ProjectItem({data}) {
     const tags = data.properties.Tags.multi_select
     const start = data.properties.Date.date.start
     const end = data.properties.Date.date.end
+    const url = data.properties.URL?.rich_text[0]?.plain_text
 
     const calculatedPeriod = (start, end) => {
         const startDateStringArray = start.split('-');
@@ -27,8 +28,15 @@ export default function ProjectItem({data}) {
         return result;
     };
 
+    const handleCardClick = () => {
+        if (url) window.open(url, '_blank', 'noopener,noreferrer')
+    }
+
     return (
-        <div className="project-card">
+        <div
+            className={`project-card${url ? ' cursor-pointer' : ''}`}
+            onClick={handleCardClick}
+        >
 
             <Image
                 className="rounded-t-xl"
@@ -44,7 +52,7 @@ export default function ProjectItem({data}) {
             <div className="p-4 flex flex-col">
                 <h1 className="text-2xl font-bold">{title}</h1>
                 <h3 className="mt-4 text-xl">{desc}</h3>
-                <a href={github}>깃허브 바로가기</a>
+                <a href={github} onClick={(e) => e.stopPropagation()}>깃허브 바로가기</a>
                 {/* <a href={youtube}>유튜브 시연영상 보러가기</a> */}
                 <p className="my-1 ">
                     작업기간 : {start} ~ {end} ({calculatedPeriod(start, end)}일)
